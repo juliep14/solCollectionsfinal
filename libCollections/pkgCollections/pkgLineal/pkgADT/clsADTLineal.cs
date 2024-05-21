@@ -219,6 +219,11 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 {
                     if (prmByAscending)
                     {
+                        opItsOrderedAscending();
+                    }
+                    else
+                    {
+                        opItsOrderedDescending();
                     }
                 }
             }
