@@ -13,7 +13,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         protected int attTotalCapacity = 100;
         protected bool attItsOrderedAscending = false;
         protected bool attItsOrderedDescending = false;
-        protected static int attMaxCapacity = int.MaxValue / 16;
+        protected static int attMaxCapacity = int.MaxValue / 32;
         protected T[] attItems = new T[100];
         #endregion
         #region Builders
