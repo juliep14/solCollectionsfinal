@@ -170,7 +170,6 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         {
             throw new NotImplementedException();
         }
-        //bool opToItems(T[] prmArray, bool prmItsOrderedAscending);
         #endregion
         #region CRUDs
         public virtual bool opModify(int prmIdx, T prmItem)
@@ -206,39 +205,13 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         {
             throw new NotImplementedException();
         }
-        public bool opItsValid()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool opBubbleSort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool opCocktailSort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool opInserSort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool opMergeSort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool opQuickSort()
-        {
-            throw new NotImplementedException();
-        }
-
+        #endregion
+        #region Sorting
         public bool opBubbleSort(bool prmByAscending)
         {
-            throw new NotImplementedException();
+            if (attItems == null || attLength <= 1) return false;
+
+            return true;
         }
 
         public bool opCocktailSort(bool prmByAscending)
