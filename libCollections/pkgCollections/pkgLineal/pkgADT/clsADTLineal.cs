@@ -209,8 +209,22 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         #region Sorting
         public bool opBubbleSort(bool prmByAscending)
         {
+            T[] varArray = this.opToArray();
+            // la implementacion
+            this.opToItems(varArray);
             if (attItems == null || attLength <= 1) return false;
+            for (int i = 0; i < attLength - 1; i++)
+            {
+                for (int j = 0; j < attLength - i - 1; j++)
+                {
+                    if (prmByAscending)
+                    {
+                    }
+                }
+            }
 
+            attItsOrderedAscending = prmByAscending;
+            attItsOrderedDescending = !prmByAscending;
             return true;
         }
 
