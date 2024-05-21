@@ -40,7 +40,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgVector.pkgADT
         #region Getters
         public int opGetTotalCapacity()
         {
-            if (attTotalCapacity > int.MaxValue / 16)
+            if (attTotalCapacity > int.MaxValue / 32)
             {
                 attTotalCapacity = 100;
                 return attTotalCapacity;
