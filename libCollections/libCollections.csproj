@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84CC0C6D-CB41-4BE3-83F1-48EC0CA24B6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pkgServices</RootNamespace>
+    <AssemblyName>libCollections</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="pkgCollections\pkgLineal\pkgADT\clsADTDoubleLinked.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgADT\clsADTLineal.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgADT\clsADTLinked.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgDoubleLinked\clsDoubleLinkedList.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgDoubleLinked\clsDoubleLinkedQueue.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgDoubleLinked\clsDoubleLinkedStack.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iADTDoubleLinked.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iADTLineal.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iADTLinked.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iADTVector.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iIterator.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iList.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iQueue.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgInterfaces\iStack.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgADT\clsADTVector.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgIterators\clsIterator.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgLinked\clsLinkedList.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgLinked\clsLinkedQueue.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgLinked\clsLinkedStack.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgVector\clsVectorList.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgVector\clsVectorQueue.cs" />
+    <Compile Include="pkgCollections\pkgLineal\pkgVector\clsVectorStack.cs" />
+    <Compile Include="pkgCollections\pkgNodes\clsDoubleLinkedNode.cs" />
+    <Compile Include="pkgCollections\pkgNodes\clsLinkedNode.cs" />
+    <Compile Include="pkgCollections\pkgNodes\clsNode.cs" />
+    <Compile Include="pkgCollections\pkgNodes\pkgInterfaces\iDoubleLinkedNode.cs" />
+    <Compile Include="pkgCollections\pkgNodes\pkgInterfaces\iLinkedNode.cs" />
+    <Compile Include="pkgCollections\pkgNodes\pkgInterfaces\iNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
