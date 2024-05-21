@@ -1,13 +1,12 @@
 ﻿using pkgServices.pkgCollections.pkgLineal.pkgInterfaces;
 using pkgServices.pkgCollections.pkgLineal.pkgIterators;
-using pkgServices.pkgCollections.pkgLineal.pkgLinked;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace pkgServices.pkgCollections.pkgLineal.pkgADT
 {
-    public class clsADTLineal<T>: clsIterator<T>, iADTLineal<T> where T : IComparable<T>
+    public class clsADTLineal<T> : clsIterator<T>, iADTLineal<T> where T : IComparable<T>
     {
         #region Attributes
         protected int attTotalCapacity = 100;
@@ -25,7 +24,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             try
             {
                 if (attLength < 0) attLength = 0;
-                T[]attItems = new T[attLength];
+                T[] attItems = new T[attLength];
             }
             catch
             {
@@ -77,7 +76,9 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 }
             }
             return false;
+            
         }
+
         public bool opItsOrderedDescending()
         {
             if (attItems == null) return false;
@@ -104,8 +105,9 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     return false;
                 }
             }
-            return false;
+            return true;
         }
+
         #endregion
         #region Getters
         public int opGetLength()
@@ -124,7 +126,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             {
                 return null;
             }
-            if (attLength == 0) 
+            if (attLength == 0)
             {
                 T[] prmArray = new T[100];
                 for (int i = 0; i < 100; i++)
@@ -133,7 +135,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 }
                 return prmArray;
             }
-            if(attLength ==  attItems.Length/2)
+            if (attLength == attItems.Length / 2)
             {
                 T[] prmarray = new T[attItems.Length];
                 for (int i = 0; i < attItems.Length; i++)
@@ -144,8 +146,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             }
             if (attLength != attItems.Length)
             {
-                T[] array = new T[attLength+1];
-                for (int i = 0; i < attLength+1; i++)
+                T[] array = new T[attLength + 1];
+                for (int i = 0; i < attLength + 1; i++)
                 {
                     array[i] = attItems[i];
                 }
