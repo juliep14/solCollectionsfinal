@@ -220,9 +220,9 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 {
                     if (prmByAscending)
                     {
+                        //opItsOrderedAscending();
                         if (Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) > 0)
                         {
-                            // Swap attItems[j] and attItems[j + 1]
                             T temp = attItems[j];
                             attItems[j] = attItems[j + 1];
                             attItems[j + 1] = temp;
@@ -232,7 +232,6 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     {
                         if (Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) < 0)
                         {
-                            // Swap attItems[j] and attItems[j + 1]
                             T temp = attItems[j];
                             attItems[j] = attItems[j + 1];
                             attItems[j + 1] = temp;
