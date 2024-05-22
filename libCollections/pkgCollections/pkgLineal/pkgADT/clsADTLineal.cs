@@ -51,7 +51,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         public bool opItsOrderedAscending()
         {
-            if (attItems == null) return false;
+            /*if (attItems == null) return false;
             if (attItems.All(item => item.Equals(default(T))))
             {
                 return false;
@@ -74,14 +74,14 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 {
                     return false;
                 }
-            }
-            return false;
+            }*/
+            return attItsOrderedAscending;
         }
         public bool opItsOrderedDescending()
         {
             #region 
 
-            if (attItems == null) return false;
+           /* if (attItems == null) return false;
             if (attItems.All(item => item.Equals(default(T))))
             {
                 return false;
@@ -104,8 +104,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 {
                     return false;
                 }
-            }
-            return false; 
+            }*/
+            return attItsOrderedDescending; 
             #endregion
         }
 
