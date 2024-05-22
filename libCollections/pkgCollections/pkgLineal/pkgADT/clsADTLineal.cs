@@ -51,43 +51,22 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         public bool opItsOrderedAscending()
         {
+
             if (attItems == null || attLength <= 1)
             {
-                return false;
-            }
-
-            HashSet<T> uniqueElements = new HashSet<T>();
-
-            for (int i = 0; i < attLength; i++)
-            {
-                if (EqualityComparer<T>.Default.Equals(attItems[i], default(T)))
-                {
-                    return false;
-                }
-
-                if (!uniqueElements.Add(attItems[i]))
-                {
-                    return false;
-                }
-            }
-
-            for (int i = 1; i < attLength; i++)
-            {
-                if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) <= 0)
-                {
-                    return false;
-                }
+               // return false;
+                return true; 
             }
 
             for (int i = 1; i < attLength; i++)
             {
                 if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) < 0)
                 {
-                    return true;
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
 
 
