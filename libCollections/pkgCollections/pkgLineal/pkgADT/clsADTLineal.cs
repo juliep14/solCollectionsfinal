@@ -75,16 +75,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     return false;
                 }
             }
-            if (attItems == null || attLength <= 1) return false;
-            for (int i = 1; i < attLength; i++)
-            {
-                if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) < 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-            //return false;
+            return false;
             /*if (attItems == null || attLength <= 1) return false;
             for (int i = 1; i < attLength; i++)
             {
@@ -99,7 +90,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
 
         public bool opItsOrderedDescending()
         {
-            /* if (attItems == null) return false;
+             if (attItems == null) return false;
              if (attItems.All(item => item.Equals(default(T))))
              {
                  return false;
@@ -123,8 +114,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                      return false;
                  }
              }
-             return false;*/
-            if (attItems == null || attLength <= 1) return false;
+             return false;
+            /*if (attItems == null || attLength <= 1) return false;
             for (int i = 1; i < attLength; i++)
             {
                 if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) > 0)
@@ -132,7 +123,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     return false;
                 }
             }
-            return true;
+            return true;*/
         }
 
         #endregion
