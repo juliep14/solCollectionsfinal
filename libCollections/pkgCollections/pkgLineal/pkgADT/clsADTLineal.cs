@@ -51,64 +51,13 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         public bool opItsOrderedAscending()
         {
-            /*if (attItems == null) return false;
-            if (attItems.All(item => item.Equals(default(T))))
-            {
-                return false;
-            }
-            HashSet<T> uniqueElements = new HashSet<T>();
-            for (int i = 0; i < attLength; i++)
-            {
-                if (EqualityComparer<T>.Default.Equals(attItems[i], default(T)))
-                {
-                    return false;
-                }
-                if (!uniqueElements.Add(attItems[i]))
-                {
-                    return false;
-                }
-            }
-            for (int i = 1; i < attLength; i++)
-            {
-                if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) <= 0)
-                {
-                    return false;
-                }
-            }*/
             return attItsOrderedAscending;
         }
         public bool opItsOrderedDescending()
         {
-            #region 
+            return attItsOrderedDescending;
 
-           /* if (attItems == null) return false;
-            if (attItems.All(item => item.Equals(default(T))))
-            {
-                return false;
-            }
-            HashSet<T> uniqueElements = new HashSet<T>();
-            for (int i = 0; i < attLength; i++)
-            {
-                if (EqualityComparer<T>.Default.Equals(attItems[i], default(T)))
-                {
-                    return false;
-                }
-                if (!uniqueElements.Add(attItems[i]))
-                {
-                    return false;
-                }
-            }
-            for (int i = 1; i < attLength; i++)
-            {
-                if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) >= 0)
-                {
-                    return false;
-                }
-            }*/
-            return attItsOrderedDescending; 
-            #endregion
         }
-
         #endregion
         #region Getters
         public int opGetLength()
@@ -200,14 +149,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             prmArray.Reverse();
             return true;
         }
-        public int opGetLength(T prmItem)
-        {
-            throw new NotImplementedException();
-        }
-        public bool opItsValid(int prmIndex)
-        {
-            throw new NotImplementedException();
-        }
+        
+        
         #endregion
         #region Sorting
         public bool opBubbleSort(bool prmByAscending)
@@ -220,7 +163,6 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             {
                 for (int j = 0; j < attLength - i - 1; j++)
                 {
-                    // Check the condition for swapping
                     if ((prmByAscending && Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) > 0) ||
                         (!prmByAscending && Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) < 0))
                     {

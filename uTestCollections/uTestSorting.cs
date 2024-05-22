@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using pkgServices.pkgCollections.pkgLineal.pkgVector;
 
 namespace uTestCollections
@@ -15,7 +14,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opBubbleSort(true));
@@ -32,7 +31,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opBubbleSort(false));
@@ -159,7 +158,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opCocktailSort(true));
@@ -176,7 +175,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opCocktailSort(false));
@@ -303,7 +302,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opInsertSort(true));
@@ -320,7 +319,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opInsertSort(false));
@@ -447,7 +446,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opMergeSort(true));
@@ -464,7 +463,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opMergeSort(false));
@@ -591,7 +590,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opQuickSort(true));
@@ -608,7 +607,7 @@ namespace uTestCollections
         {
             #region Setup
             testMyStack = new clsVectorStack<int>();
-            testExpectedItems = new int[100];
+            testExpectedItems = null;
             #endregion
             #region Test&Assert
             Assert.IsFalse(testMyStack.opQuickSort(false));
