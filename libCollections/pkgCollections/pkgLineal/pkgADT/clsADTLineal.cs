@@ -79,6 +79,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         public bool opItsOrderedDescending()
         {
+            #region 
+
             if (attItems == null) return false;
             if (attItems.All(item => item.Equals(default(T))))
             {
@@ -103,7 +105,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     return false;
                 }
             }
-            return false;
+            return false; 
+            #endregion
         }
 
         #endregion
@@ -213,28 +216,17 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             // la implementacion
             //this.opToItems(varArray);
             if (attItems == null || attLength <= 1) return false;
-
             for (int i = 0; i < attLength - 1; i++)
             {
                 for (int j = 0; j < attLength - i - 1; j++)
                 {
-                    if (prmByAscending)
+                    // Check the condition for swapping
+                    if ((prmByAscending && Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) > 0) ||
+                        (!prmByAscending && Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) < 0))
                     {
-                        if (Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) > 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j + 1];
-                            attItems[j + 1] = temp;
-                        }
-                    }
-                    else
-                    {
-                        if (Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) < 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j + 1];
-                            attItems[j + 1] = temp;
-                        }
+                        T temp = attItems[j];
+                        attItems[j] = attItems[j + 1];
+                        attItems[j + 1] = temp;
                     }
                 }
             }
@@ -243,23 +235,25 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
 
         public bool opCocktailSort(bool prmByAscending)
         {
-            throw new NotImplementedException();
+            if (attItems == null || attLength <= 1) return false;
+            return true;
         }
-
 
         public bool opInsertSort(bool prmByAscending)
         {
-            throw new NotImplementedException();
-        }
+            if (attItems == null || attLength <= 1) return false;
 
+            return true;
+        }
         public bool opMergeSort(bool prmByAscending)
         {
-            throw new NotImplementedException();
+            if (attItems == null || attLength <= 1) return false;
+            return true;
         }
-
         public bool opQuickSort(bool prmByAscending)
         {
-            throw new NotImplementedException();
+            if (attItems == null || attLength <= 1) return false;
+            return true;
         }
         #endregion
         #endregion
