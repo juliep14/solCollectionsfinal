@@ -1,7 +1,6 @@
 ﻿using pkgServices.pkgCollections.pkgLineal.pkgInterfaces;
 using pkgServices.pkgCollections.pkgLineal.pkgIterators;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace pkgServices.pkgCollections.pkgLineal.pkgADT
@@ -51,7 +50,14 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         public bool opItsOrderedAscending()
         {
-            return attItsOrderedAscending;
+            if(attItems == null) return false;
+
+            if (opBubbleSort(true)) 
+                return true;
+            if (attItsOrderedAscending)
+                return true; 
+            return false;
+           // return attItsOrderedAscending;
         }
         public bool opItsOrderedDescending()
         {
@@ -149,31 +155,38 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             prmArray.Reverse();
             return true;
         }
-        
-        
+
+
         #endregion
         #region Sorting
         public bool opBubbleSort(bool prmByAscending)
         {
-            //T[] varArray = this.opToArray();
-            // la implementacion
-            //this.opToItems(varArray);
-            if (attItems == null || attLength <= 1) return false;
-            for (int i = 0; i < attLength - 1; i++)
+            if (attItems == null || attLength == 0)
+                return false; 
+
+            if (prmByAscending)
             {
-                for (int j = 0; j < attLength - i - 1; j++)
+                int length = attLength;
+                T[] tempArray = this.opToArray();
+
+                for (int i = 0; i < length - 1; i++)
                 {
-                    if ((prmByAscending && Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) > 0) ||
-                        (!prmByAscending && Comparer<T>.Default.Compare(attItems[j], attItems[j + 1]) < 0))
+                    for (int j = 0; j < length - i - 1; j++)
                     {
-                        T temp = attItems[j];
-                        attItems[j] = attItems[j + 1];
-                        attItems[j + 1] = temp;
+                        if (tempArray[j].CompareTo(tempArray[j + 1]) > 0)
+                        {
+                            T temp = tempArray[j];
+                            tempArray[j] = tempArray[j + 1];
+                            tempArray[j + 1] = temp;
+                        }
                     }
                 }
+                attItems = tempArray; 
             }
-            return true;
+
+            return true; 
         }
+
 
         public bool opCocktailSort(bool prmByAscending)
         {
