@@ -75,7 +75,16 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     return false;
                 }
             }
-            return false;
+            //if (attLength <= 1) return false;
+            for (int i = 1; i < attLength; i++)
+            {
+                if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) < 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+            //return false;
             /*if (attItems == null || attLength <= 1) return false;
             for (int i = 1; i < attLength; i++)
             {
@@ -114,7 +123,16 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                      return false;
                  }
              }
-             return false;
+            if (attLength <= 1) return false;
+            for (int i = 1; i < attLength; i++)
+            {
+                if (Comparer<T>.Default.Compare(attItems[i], attItems[i - 1]) > 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+            //return false;
             /*if (attItems == null || attLength <= 1) return false;
             for (int i = 1; i < attLength; i++)
             {
@@ -258,8 +276,6 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     }
                 }
             }
-            attItsOrderedAscending = prmByAscending;
-            attItsOrderedDescending = !prmByAscending;
             return true;
         }
 
@@ -267,6 +283,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         {
             throw new NotImplementedException();
         }
+
 
         public bool opInsertSort(bool prmByAscending)
         {
