@@ -105,7 +105,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     return false;
                 }
             }
-            return true;
+            return false;
         }
 
         #endregion
