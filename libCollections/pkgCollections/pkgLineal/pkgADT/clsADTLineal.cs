@@ -73,6 +73,9 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         #region Serialize/Deserialize
         public virtual T[] opToArray()
         {
+            /*
+             
+             */
             if (attItems == null)
             {
                 return null;
@@ -150,8 +153,6 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             prmArray.Reverse();
             return true;
         }
-
-
         #endregion
         #region Sorting
         public bool opBubbleSort(bool prmByAscending)
@@ -211,7 +212,11 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         public bool opCocktailSort(bool prmByAscending)
         {
-            /*if (attItems == null || attLength <= 1) return false;
+            if (attItems == null || attLength <= 1)
+            {
+                attItems = null;
+                return false;
+            }
             for (int i = 0; i < attLength / 2; i++)
             {
                 bool swapped = false;
@@ -243,116 +248,29 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             this.opToItems(attItems, attLength);
             attItsOrderedAscending = prmByAscending;
             attItsOrderedDescending = !prmByAscending;
-            return true;*/
-            if (prmByAscending)
-            {
-                if (attLength == 0)
-                {
-                    attItems = null;
-                    return false;
-                }
-                attItems = this.opToArray();
-                int length = attLength;
-                for (int i = 0; i < length - 1; i++)
-                {
-                    bool swapped = false;
-                    for (int j = i; j < length - i - 1; j++)
-                    {
-                        if (attItems[j].CompareTo(attItems[j + 1]) > 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j + 1];
-                            attItems[j + 1] = temp;
-                            swapped = true;
-                        }
-                    }
-                    if (!swapped) break;
+            return true;
 
-                    swapped = false;
-                    for (int j = length - i - 2; j > i; j--)
-                    {
-                        if (attItems[j].CompareTo(attItems[j - 1]) < 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j - 1];
-                            attItems[j - 1] = temp;
-                            swapped = true;
-                        }
-                    }
-                    if (!swapped) break;
-                }
-                this.opToItems(attItems, attLength);
-                attItsOrderedAscending = true;
-                return true;
-            }
-            else
-            {
-                if (attLength == 0)
-                {
-                    attItems = null;
-                    return false;
-                }
-                attItems = this.opToArray();
-                int lenght = attLength;
-                int length = attLength;
-                for (int i = 0; i < length - 1; i++)
-                {
-                    bool swapped = false;
-                    for (int j = i; j < length - i - 1; j++)
-                    {
-                        if (attItems[j].CompareTo(attItems[j + 1]) < 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j + 1];
-                            attItems[j + 1] = temp;
-                            swapped = true;
-                        }
-                    }
-                    if (!swapped) break;
-
-                    swapped = false;
-                    for (int j = length - i - 2; j > i; j--)
-                    {
-                        if (attItems[j].CompareTo(attItems[j - 1]) > 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j - 1];
-                            attItems[j - 1] = temp;
-                            swapped = true;
-                        }
-                    }
-                    if (!swapped) break;
-                }
-                this.opToItems(attItems, attLength);
-                attItsOrderedDescending = true;
-                return true;
-            }
         }
         public bool opInsertSort(bool prmByAscending)
         {
             {
                 if (attItems == null || attLength <= 1)
                 {
-
                     attItems = null;
                     return false;
                 }
-
                 for (int i = 1; i < attLength; i++)
                 {
                     T key = attItems[i];
                     int j = i - 1;
 
-                    while (j >= 0 && ((prmByAscending && attItems[j].CompareTo(key) > 0) ||
-                                      (!prmByAscending && attItems[j].CompareTo(key) < 0)))
+                    while (j >= 0 && ((prmByAscending && attItems[j].CompareTo(key) > 0) || (!prmByAscending && attItems[j].CompareTo(key) < 0)))
                     {
                         attItems[j + 1] = attItems[j];
                         j--;
                     }
-
                     attItems[j + 1] = key;
                 }
-
                 this.opToItems(attItems, attLength);
                 attItsOrderedAscending = prmByAscending;
                 attItsOrderedDescending = !prmByAscending;
@@ -368,14 +286,42 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             }
             return true;
         }
+        static void swap(int[] attItems, int i, int j)
+        {
+            int temp = attItems[i];
+            attItems[i] = attItems[j];
+            attItems[j] = temp;
+        }
+        static int partition(int[] attItems, int low, int high)
+        {
+            // Choosing the pivot
+            int pivot = attItems[high];
+            // Index of smaller element and indicates
+            // the right position of pivot found so far
+            int i = (low - 1);
+
+            for (int j = low; j <= high - 1; j++)
+            {
+                // If current element is smaller than the pivot
+                if (attItems[j] < pivot)
+                {
+                    // Increment index of smaller element
+                    i++;
+                    swap(attItems, i, j);
+                }
+            }
+            swap(attItems, i + 1, high);
+            return (i + 1);//anotar complejidad temporal
+        }
         public bool opQuickSort(bool prmByAscending)
         {
+            
             if (attLength == 0)
             {
                 attItems = null;
                 return false;
             }
-            //if (attItems == null || attLength <= 1) return false;
+          
             return true;
         }
         #endregion
