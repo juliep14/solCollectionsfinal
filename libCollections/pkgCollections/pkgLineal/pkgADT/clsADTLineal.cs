@@ -231,7 +231,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                         swapped = true;
                     }
                 }
-                if (!swapped) break; 
+                if (!swapped) break;
                 for (int j = attLength - 2 - i; j > i; j--)
                 {
                     if ((prmByAscending && attItems[j].CompareTo(attItems[j - 1]) < 0) ||
@@ -243,13 +243,12 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                         swapped = true;
                     }
                 }
-                if (!swapped) break; 
+                if (!swapped) break;
             }
             this.opToItems(attItems, attLength);
             attItsOrderedAscending = prmByAscending;
             attItsOrderedDescending = !prmByAscending;
             return true;
-
         }
         public bool opInsertSort(bool prmByAscending)
         {
@@ -284,47 +283,109 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 attItems = null;
                 return false;
             }
+            this.opToItems(attItems, attLength);
+            attItsOrderedAscending = prmByAscending;
+            attItsOrderedDescending = !prmByAscending;
+
+            MergeSort(attItems, 0, attLength - 1, prmByAscending);
             return true;
         }
-        static void swap(int[] attItems, int i, int j)
+        private void MergeSort(T[] attItems, int left, int right, bool attItsOrderedAscending)
         {
-            int temp = attItems[i];
+            if (left < right)
+            {
+                int middle = left + (right - left) / 2;
+                MergeSort(attItems, left, middle, attItsOrderedAscending);
+                MergeSort(attItems, middle + 1, right, attItsOrderedAscending);
+
+                Merge(attItems, left, middle, right, attItsOrderedAscending);
+            }
+        }
+        private void Merge(T[] attItems, int left, int middle, int right, bool ascending)
+        {
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+            T[] leftArray = new T[n1];
+            T[] rightArray = new T[n2];
+            Array.Copy(attItems, left, leftArray, 0, n1);
+            Array.Copy(attItems, middle + 1, rightArray, 0, n2);
+            int i = 0, j = 0, k = left;
+            while (i < n1 && j < n2)
+            {
+                if ((ascending && leftArray[i].CompareTo(rightArray[j]) <= 0) || (!ascending && leftArray[i].CompareTo(rightArray[j]) >= 0))
+                {
+                    attItems[k] = leftArray[i];
+                    i++;
+                }
+                else
+                {
+                    attItems[k] = rightArray[j];
+                    j++;
+                }
+                k++;
+            }
+            while (i < n1)
+            {
+                attItems[k] = leftArray[i];
+                i++;
+                k++;
+            }
+            while (j < n2)
+            {
+                attItems[k] = rightArray[j];
+                j++;
+                k++;
+            }
+        }
+        private void Swap(T[] attItems, int i, int j)
+        {
+            T temp = attItems[i];
             attItems[i] = attItems[j];
             attItems[j] = temp;
         }
-        static int partition(int[] attItems, int low, int high)
+        private int Partition(T[] attItems, int low, int high, bool ascending)
         {
-            // Choosing the pivot
-            int pivot = attItems[high];
-            // Index of smaller element and indicates
-            // the right position of pivot found so far
+            T pivot = attItems[high];
             int i = (low - 1);
 
-            for (int j = low; j <= high - 1; j++)
+            for (int j = low; j < high; j++)
             {
-                // If current element is smaller than the pivot
-                if (attItems[j] < pivot)
+                if ((ascending && attItems[j].CompareTo(pivot) < 0) || (!ascending && attItems[j].CompareTo(pivot) > 0))
                 {
-                    // Increment index of smaller element
                     i++;
-                    swap(attItems, i, j);
+                    Swap(attItems, i, j);
                 }
             }
-            swap(attItems, i + 1, high);
-            return (i + 1);//anotar complejidad temporal
+            Swap(attItems, i + 1, high);
+            return i + 1;
+        }
+        private void QuickSort(T[] attItems, int low, int high, bool ascending)
+        {
+            if (low < high)
+            {
+                int partition = Partition(attItems, low, high, ascending);
+                QuickSort(attItems, low, partition - 1, ascending);
+                QuickSort(attItems, partition + 1, high, ascending);
+            }
         }
         public bool opQuickSort(bool prmByAscending)
         {
-            
             if (attLength == 0)
             {
                 attItems = null;
                 return false;
             }
-          
+
+            QuickSort(attItems, 0, attLength - 1, prmByAscending);
+            this.opToItems(attItems, attLength);
+            attItsOrderedAscending = prmByAscending;
+            attItsOrderedDescending = !prmByAscending;
             return true;
         }
-        #endregion
+
         #endregion
     }
+    #endregion
+
 }
+
