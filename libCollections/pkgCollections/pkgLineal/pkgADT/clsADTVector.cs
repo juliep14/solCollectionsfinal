@@ -166,6 +166,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgVector.pkgADT
                 }
                 return prmArray;
             }
+            if (attItems == null) return null;
             T[] result = new T[attTotalCapacity];
             for (int i = 0; i < attTotalCapacity; i++)
             {
