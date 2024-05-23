@@ -9,12 +9,18 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgIterators
         protected int attLength = 0;
         protected int attCurrentIdx = -1;
         protected T attCurrentItem;
+        
         #endregion
         #region Operations
         #region Movement
         public virtual bool opGoFirst()
         {
-            throw new NotImplementedException();
+            if (attLength == 0)
+            {
+                return false;
+            }
+            attCurrentIdx = 0;  
+            return true;
         }
         public virtual bool opGoFirstQuarter()
         { throw new NotImplementedException(); }
@@ -95,7 +101,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgIterators
         {
             if(attCurrentIdx <= 0) return false;
             return true;
-        } 
+        }
         #endregion
         #endregion
     }

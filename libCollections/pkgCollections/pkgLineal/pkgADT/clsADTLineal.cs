@@ -71,16 +71,13 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         #endregion
         #region Serialize/Deserialize
-        public virtual T[] opToArray()
+        public virtual T[] opToArray() //O(n)
         {
-            /*
-             
-             */
-            if (attItems == null)
+            if (attItems == null) //O(1)
             {
                 return null;
-            }
-            if (attLength == 0)
+            } 
+            if (attLength == 0) //O(n)
             {
                 T[] prmArray = new T[100];
                 for (int i = 0; i < 100; i++)
@@ -88,8 +85,8 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                     prmArray[i] = attItems[i];
                 }
                 return prmArray;
-            }
-            if (attLength == attItems.Length / 2)
+            } 
+            if (attLength == attItems.Length / 2) //O(n)
             {
                 T[] prmarray = new T[attItems.Length];
                 for (int i = 0; i < attItems.Length; i++)
@@ -98,7 +95,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 }
                 return prmarray;
             }
-            if (attLength != attItems.Length)
+            if (attLength != attItems.Length) //O(n)
             {
                 T[] array = new T[attLength + 1];
                 for (int i = 0; i < attLength + 1; i++)
@@ -108,7 +105,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 return array;
             }
             T[] result = new T[attLength];
-            for (int i = 0; i < attLength; i++)
+            for (int i = 0; i < attLength; i++) //O(n)
             {
                 result[i] = attItems[i];
             }
@@ -128,17 +125,17 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         #endregion
         #region CRUDs
-        public virtual bool opModify(int prmIdx, T prmItem)
+        public virtual bool opModify(int prmIdx, T prmItem) //O(1)
         {
-            if (!opGo(prmIdx)) return false;
+            if (!opGo(prmIdx)) return false; //o1
             return opSetCurrentItem(prmItem);
         }
-        public virtual bool opRetrieve(int prmIdx, ref T prmItem)
+        public virtual bool opRetrieve(int prmIdx, ref T prmItem) //O(1)
         {
-            if (attItems == null) return false;
-            if (prmIdx >= 0 && prmIdx < attLength)
+            if (attItems == null) return false; //O(1)
+            if (prmIdx >= 0 && prmIdx < attLength) //O(1)
             {
-                prmItem = attItems[prmIdx];
+                prmItem = attItems[prmIdx]; //O(1)
                 return true;
             }
             else
@@ -147,80 +144,51 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 return false;
             }
         }
-        public bool opReverse()
+        public bool opReverse()//O(n)
         {
-            T[] prmArray = new T[attLength];
-            prmArray.Reverse();
+            T[] prmArray = new T[attLength];//O(1)
+            prmArray.Reverse();//O(n)  implica iterar sobre el arreglo y cambiar de posición los elementos
             return true;
         }
         #endregion
         #region Sorting
-        public bool opBubbleSort(bool prmByAscending)
+        public bool opBubbleSort(bool prmByAscending) //O(N2)n²
         {
-            if (prmByAscending)
-            {
-                if (attLength == 0)
-                {
-                    attItems = null;
-                    return false;
-                }
-                int lenght = attLength;
-                attItems = this.opToArray();
-                for (int i = 0; i < attLength - 1; i++)
-                {
-                    for (int j = 0; j < lenght - i - 1; j++)
-                    {
-                        if (attItems[j].CompareTo(attItems[j + 1]) > 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j + 1];
-                            attItems[j + 1] = temp;
-                        }
-                    }
-                }
-                this.opToItems(attItems, attLength);
-                attItsOrderedAscending = true;
-                attItsOrderedDescending = false;
-                return true;
-            }
-            else
-            {
-                if (attLength == 0)
-                {
-                    attItems = null;
-                    return false;
-                }
-                int lenght = attLength;
-                attItems = this.opToArray();
-                for (int i = 0; i < lenght - 1; i++)
-                {
-                    for (int j = 0; j < lenght - i - 1; j++)
-                    {
-                        if (attItems[j].CompareTo(attItems[j + 1]) < 0)
-                        {
-                            T temp = attItems[j];
-                            attItems[j] = attItems[j + 1];
-                            attItems[j + 1] = temp;
-                        }
-                    }
-                }
-                this.opToItems(attItems, attLength);
-                attItsOrderedAscending = false;
-                attItsOrderedDescending = true;
-                return true;
-            }
-        }
-        public bool opCocktailSort(bool prmByAscending)
-        {
-            if (attItems == null || attLength <= 1)
+            if (attLength == 0) //1
             {
                 attItems = null;
                 return false;
             }
-            for (int i = 0; i < attLength / 2; i++)
+            attItems = this.opToArray();
+            for (int i = 0; i < attLength - 1; i++) //n
+            {
+                for (int j = 0; j < attLength - i - 1; j++)//n
+                {
+                    if ((prmByAscending && attItems[j].CompareTo(attItems[j + 1]) > 0) || (!prmByAscending && attItems[j].CompareTo(attItems[j + 1]) < 0))
+                    {
+                        T temp = attItems[j];
+                        attItems[j] = attItems[j + 1];
+                        attItems[j + 1] = temp;
+                    }
+                }
+            }
+            if (prmByAscending) attItsOrderedAscending = true;
+            else attItsOrderedDescending = true;
+            this.opToItems(attItems, attLength);
+            return true;
+
+        }
+        public bool opCocktailSort(bool prmByAscending) //O(n²)
+        {
+            if (attItems == null || attLength <= 1)//1
+            {
+                attItems = null;
+                return false;
+            }
+            for (int i = 0; i < attLength / 2; i++) //o(n)
             {
                 bool swapped = false;
-                for (int j = i; j < attLength - i - 1; j++)
+                for (int j = i; j < attLength - i - 1; j++) //o(n)
                 {
                     if ((prmByAscending && attItems[j].CompareTo(attItems[j + 1]) > 0) ||
                         (!prmByAscending && attItems[j].CompareTo(attItems[j + 1]) < 0))
@@ -231,7 +199,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                         swapped = true;
                     }
                 }
-                if (!swapped) break; 
+                if (!swapped) break;
                 for (int j = attLength - 2 - i; j > i; j--)
                 {
                     if ((prmByAscending && attItems[j].CompareTo(attItems[j - 1]) < 0) ||
@@ -243,13 +211,12 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                         swapped = true;
                     }
                 }
-                if (!swapped) break; 
+                if (!swapped) break;
             }
             this.opToItems(attItems, attLength);
             attItsOrderedAscending = prmByAscending;
             attItsOrderedDescending = !prmByAscending;
             return true;
-
         }
         public bool opInsertSort(bool prmByAscending)
         {
@@ -284,47 +251,109 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 attItems = null;
                 return false;
             }
+            this.opToItems(attItems, attLength);
+            attItsOrderedAscending = prmByAscending;
+            attItsOrderedDescending = !prmByAscending;
+
+            MergeSort(attItems, 0, attLength - 1, prmByAscending);
             return true;
         }
-        static void swap(int[] attItems, int i, int j)
+        private void MergeSort(T[] attItems, int left, int right, bool attItsOrderedAscending)
         {
-            int temp = attItems[i];
+            if (left < right)
+            {
+                int middle = left + (right - left) / 2;
+                MergeSort(attItems, left, middle, attItsOrderedAscending);
+                MergeSort(attItems, middle + 1, right, attItsOrderedAscending);
+
+                Merge(attItems, left, middle, right, attItsOrderedAscending);
+            }
+        }
+        private void Merge(T[] attItems, int left, int middle, int right, bool ascending)
+        {
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+            T[] leftArray = new T[n1];
+            T[] rightArray = new T[n2];
+            Array.Copy(attItems, left, leftArray, 0, n1);
+            Array.Copy(attItems, middle + 1, rightArray, 0, n2);
+            int i = 0, j = 0, k = left;
+            while (i < n1 && j < n2)
+            {
+                if ((ascending && leftArray[i].CompareTo(rightArray[j]) <= 0) || (!ascending && leftArray[i].CompareTo(rightArray[j]) >= 0))
+                {
+                    attItems[k] = leftArray[i];
+                    i++;
+                }
+                else
+                {
+                    attItems[k] = rightArray[j];
+                    j++;
+                }
+                k++;
+            }
+            while (i < n1)
+            {
+                attItems[k] = leftArray[i];
+                i++;
+                k++;
+            }
+            while (j < n2)
+            {
+                attItems[k] = rightArray[j];
+                j++;
+                k++;
+            }
+        }
+        private void Swap(T[] attItems, int i, int j)
+        {
+            T temp = attItems[i];
             attItems[i] = attItems[j];
             attItems[j] = temp;
         }
-        static int partition(int[] attItems, int low, int high)
+        private int Partition(T[] attItems, int low, int high, bool ascending)
         {
-            // Choosing the pivot
-            int pivot = attItems[high];
-            // Index of smaller element and indicates
-            // the right position of pivot found so far
+            T pivot = attItems[high];
             int i = (low - 1);
 
-            for (int j = low; j <= high - 1; j++)
+            for (int j = low; j < high; j++)
             {
-                // If current element is smaller than the pivot
-                if (attItems[j] < pivot)
+                if ((ascending && attItems[j].CompareTo(pivot) < 0) || (!ascending && attItems[j].CompareTo(pivot) > 0))
                 {
-                    // Increment index of smaller element
                     i++;
-                    swap(attItems, i, j);
+                    Swap(attItems, i, j);
                 }
             }
-            swap(attItems, i + 1, high);
-            return (i + 1);//anotar complejidad temporal
+            Swap(attItems, i + 1, high);
+            return i + 1;
+        }
+        private void QuickSort(T[] attItems, int low, int high, bool ascending)
+        {
+            if (low < high)
+            {
+                int partition = Partition(attItems, low, high, ascending);
+                QuickSort(attItems, low, partition - 1, ascending);
+                QuickSort(attItems, partition + 1, high, ascending);
+            }
         }
         public bool opQuickSort(bool prmByAscending)
         {
-            
             if (attLength == 0)
             {
                 attItems = null;
                 return false;
             }
-          
+
+            QuickSort(attItems, 0, attLength - 1, prmByAscending);
+            this.opToItems(attItems, attLength);
+            attItsOrderedAscending = prmByAscending;
+            attItsOrderedDescending = !prmByAscending;
             return true;
         }
-        #endregion
+
         #endregion
     }
+    #endregion
+
 }
+

@@ -4,6 +4,7 @@ using pkgServices.pkgCollections.pkgLineal.pkgVector;
 namespace uTestCollections
 {
     [TestClass]
+
     public class uTestSorting
     {
         public clsVectorStack<int> testMyStack;

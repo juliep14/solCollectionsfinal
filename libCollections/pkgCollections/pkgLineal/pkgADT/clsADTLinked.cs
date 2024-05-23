@@ -130,6 +130,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         #region Iterator
         public override bool opGoFirst()
         {
+           
             if (attFirst == null) return false;
             attCurrentItem = attFirst.opGetItem();
             attCurrentIdx = 0;
