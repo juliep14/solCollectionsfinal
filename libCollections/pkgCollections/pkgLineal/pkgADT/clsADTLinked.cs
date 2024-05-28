@@ -20,7 +20,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         protected clsADTLinked() { }
         #endregion
         #region Getters
-        public clsLinkedNode<T> opGetFirst()
+        public clsLinkedNode<T> opGetFirst() //O(1)
         {
             if (attItems == null)
             {
@@ -34,7 +34,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             attFirst.opSetItem(attItems[0]);
             return attFirst;
         }
-        public clsLinkedNode<T> opGetFirstQuarter()
+        public clsLinkedNode<T> opGetFirstQuarter() //O(1)
         {
             if (attItems == null)
             {
@@ -49,7 +49,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             attFirstQuarter.opSetItem(attItems[attLength/4]);
             return attFirstQuarter;
         }
-        public clsLinkedNode<T> opGetLast()
+        public clsLinkedNode<T> opGetLast() //O(1)
         {
             if (attItems == null)
             {
@@ -69,7 +69,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             attLast.opSetItem(attItems[attLength-1]);
             return attLast;
         }
-        public clsLinkedNode<T> opGetLastQuarter()
+        public clsLinkedNode<T> opGetLastQuarter() //O(1) constante
         {
             if (attItems == null)
             {
@@ -81,16 +81,16 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 attLastQuarter = null;
                 return attLastQuarter;
             }
-            if (attLastQuarter != null) return attLastQuarter;
+            if (attLastQuarter != null) return attLastQuarter; //1
             if (attItems.Length == 4)
             {
-                attLastQuarter.opSetItem(attItems[attItems.Length - 2]);
+                attLastQuarter.opSetItem(attItems[attItems.Length - 2]);//1
                 return attLastQuarter;
             }
             attLastQuarter.opSetItem(attItems[(attLength / 4) + (attLength / 2)]);
             return attLastQuarter;
         }
-        public clsLinkedNode<T> opGetMiddle()
+        public clsLinkedNode<T> opGetMiddle() //O(1)
         {
             if (attItems == null)
             {
@@ -128,34 +128,33 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
         }
         #endregion
         #region Iterator
-        public override bool opGoFirst()
-        {
-           
-            if (attFirst == null) return false;
+        public override bool opGoFirst() //O(1)
+        {  
+            if (attFirst == null) return false;//1
             attCurrentItem = attFirst.opGetItem();
             attCurrentIdx = 0;
             return true;
         }
-        public override bool opGo(int prmIdx)
+        public override bool opGo(int prmIdx)//O(n)
         {
-            if (!opIsValid(prmIdx)) return false;
-            if (prmIdx < attLength / 4) opGoFirst();
+            if (!opIsValid(prmIdx)) return false;//1
+            if (prmIdx < attLength / 4) opGoFirst();//1
             if (prmIdx >= attLength / 4 && prmIdx < attLength / 2) opGoFirstQuarter();
             if (prmIdx >= attLength / 2 && prmIdx < attLength / 4) opGoMiddle();
             if ((prmIdx >= attLength / 2 + attLength / 4) && prmIdx < attLength) opGoLastQuarter();
-            while (attCurrentIdx < prmIdx)
+            while (attCurrentIdx < prmIdx)//n
                 opGoNext();
             return true;
         }
-        public override bool opGoFirstQuarter()
+        public override bool opGoFirstQuarter() //1
         {
             return base.opGoFirstQuarter();
         }
-        public override bool opGoLastQuarter()
+        public override bool opGoLastQuarter() //1
         {
             return base.opGoLastQuarter();
         }
-        public override void opGoForward()
+        public override void opGoForward()  //1
         {
             base.opGoForward();
             attCurrentNode = attCurrentNode.opGetNext();

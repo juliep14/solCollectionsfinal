@@ -325,7 +325,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             Swap(attItems, i + 1, high);
             return i + 1;
         }
-        private void QuickSort(T[] attItems, int low, int high, bool ascending)
+        private void QuickSort(T[] attItems, int low, int high, bool ascending)//n
         {
             if (low < high)
             {
@@ -334,21 +334,19 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 QuickSort(attItems, partition + 1, high, ascending);
             }
         }
-        public bool opQuickSort(bool prmByAscending)
+        public bool opQuickSort(bool prmByAscending)//O(n log n)
         {
             if (attLength == 0)
             {
                 attItems = null;
                 return false;
             }
-
             QuickSort(attItems, 0, attLength - 1, prmByAscending);
             this.opToItems(attItems, attLength);
             attItsOrderedAscending = prmByAscending;
             attItsOrderedDescending = !prmByAscending;
             return true;
         }
-
         #endregion
     }
     #endregion
