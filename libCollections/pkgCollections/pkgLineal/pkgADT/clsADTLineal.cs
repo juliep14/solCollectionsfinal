@@ -304,18 +304,17 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 k++;
             }
         }
-        private void Swap(T[] attItems, int i, int j)
+        private void Swap(T[] attItems, int i, int j) //O(1)
         {
             T temp = attItems[i];
             attItems[i] = attItems[j];
             attItems[j] = temp;
         }
-        private int Partition(T[] attItems, int low, int high, bool ascending)
+        private int Partition(T[] attItems, int low, int high, bool ascending) //O(n)
         {
             T pivot = attItems[high];
             int i = (low - 1);
-
-            for (int j = low; j < high; j++)
+            for (int j = low; j < high; j++) //n
             {
                 if ((ascending && attItems[j].CompareTo(pivot) < 0) || (!ascending && attItems[j].CompareTo(pivot) > 0))
                 {
