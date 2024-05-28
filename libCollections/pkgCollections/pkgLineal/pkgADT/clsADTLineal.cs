@@ -218,20 +218,20 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             attItsOrderedDescending = !prmByAscending;
             return true;
         }
-        public bool opInsertSort(bool prmByAscending)
+        public bool opInsertSort(bool prmByAscending)//O(n²)
         {
             {
-                if (attItems == null || attLength <= 1)
+                if (attItems == null || attLength <= 1)//1
                 {
                     attItems = null;
                     return false;
                 }
-                for (int i = 1; i < attLength; i++)
+                for (int i = 1; i < attLength; i++) //n
                 {
                     T key = attItems[i];
                     int j = i - 1;
 
-                    while (j >= 0 && ((prmByAscending && attItems[j].CompareTo(key) > 0) || (!prmByAscending && attItems[j].CompareTo(key) < 0)))
+                    while (j >= 0 && ((prmByAscending && attItems[j].CompareTo(key) > 0) || (!prmByAscending && attItems[j].CompareTo(key) < 0)))//n
                     {
                         attItems[j + 1] = attItems[j];
                         j--;
@@ -244,7 +244,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
                 return true;
             }
         }
-        public bool opMergeSort(bool prmByAscending)
+        public bool opMergeSort(bool prmByAscending) // O(nlogn)
         {
             if (attLength == 0)
             {
@@ -258,18 +258,17 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             MergeSort(attItems, 0, attLength - 1, prmByAscending);
             return true;
         }
-        private void MergeSort(T[] attItems, int left, int right, bool attItsOrderedAscending)
+        private void MergeSort(T[] attItems, int left, int right, bool attItsOrderedAscending) //O(n)
         {
             if (left < right)
             {
-                int middle = left + (right - left) / 2;
+                int middle = left + (right - left) / 2; //n
                 MergeSort(attItems, left, middle, attItsOrderedAscending);
                 MergeSort(attItems, middle + 1, right, attItsOrderedAscending);
-
                 Merge(attItems, left, middle, right, attItsOrderedAscending);
             }
         }
-        private void Merge(T[] attItems, int left, int middle, int right, bool ascending)
+        private void Merge(T[] attItems, int left, int middle, int right, bool ascending)//O(nlogn)
         {
             int n1 = middle - left + 1;
             int n2 = right - middle;
@@ -278,7 +277,7 @@ namespace pkgServices.pkgCollections.pkgLineal.pkgADT
             Array.Copy(attItems, left, leftArray, 0, n1);
             Array.Copy(attItems, middle + 1, rightArray, 0, n2);
             int i = 0, j = 0, k = left;
-            while (i < n1 && j < n2)
+            while (i < n1 && j < n2) //n
             {
                 if ((ascending && leftArray[i].CompareTo(rightArray[j]) <= 0) || (!ascending && leftArray[i].CompareTo(rightArray[j]) >= 0))
                 {
